@@ -26,7 +26,7 @@ class Product {
 
         }
 
-        $products = $products->orderBy($request->sort_by, $request->sort_order)->paginate($request->limit)->toArray();
+        $products = $products->where('stock', '>=', 0)->orderBy($request->sort_by, $request->sort_order)->paginate($request->limit)->toArray();
 
         return $this->manageProducts($products);
     }
@@ -48,7 +48,7 @@ class Product {
     {
         return ProductModel::firstOrCreate(
             ['name' => $request->name],
-            $request->all()
+            $this->prepareStoreParameters($request)
         );
 
     }
@@ -66,21 +66,11 @@ class Product {
         if ($product->name != $request->name) {
 
             // check if name already exist
-            if ($this->checkByField('name', $request->name)) {
-
-                return false;
-            }
+            if ($this->checkByField('name', $request->name)) return false;
 
         }
 
-        $product->name  = $request->name;
-        $product->price = $request->price;
-        $product->image = $request->image;
-        $product->stock = $request->stock;
-
-        $product->save();
-
-        return $product;
+        return ProductModel::where('id', $id)->update($this->prepareUpdateParameters($request));
 
     }
 

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,3 +17,10 @@ use App\Http\Controllers\ProductController;
 */
 
 Route::apiResource('/products', ProductController::class);
+
+Route::group(['prefix' => 'cart'], function(){
+
+    Route::post('/compute', [CartController::class, 'computeCartItems']);
+
+});
+

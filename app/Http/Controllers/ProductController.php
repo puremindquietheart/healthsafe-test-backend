@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-// Helpers
+// Illuminate Helpers
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Validation\ValidationException;
@@ -74,7 +74,7 @@ class ProductController extends Controller
             $request->validate([
                 'name'  => 'required|string|unique:products',
                 'price' => 'required|numeric',
-                'image' => 'required|string',
+                'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
                 'stock' => 'required|integer'
             ]);
 
@@ -105,7 +105,7 @@ class ProductController extends Controller
     }
 
     /*
-        $id      = product id
+        $id = product id
     */
     public function show($id)
     {
@@ -148,7 +148,7 @@ class ProductController extends Controller
             $request->validate([
                 'name'  => 'required|string',
                 'price' => 'required|numeric',
-                'image' => 'required|string',
+                'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
                 'stock' => 'required|integer'
             ]);
 
@@ -192,7 +192,7 @@ class ProductController extends Controller
     }
 
     /*
-        $id      = product id
+        $id = product id
     */
     public function destroy($id)
     {
