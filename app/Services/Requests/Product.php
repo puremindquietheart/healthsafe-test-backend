@@ -18,7 +18,7 @@ class Product {
 
         $products = new ProductModel;
 
-        if ($request->has('search')) {
+        if ($request->has('search') && $request->search != "") {
 
             $search = $request->search;
 
@@ -26,7 +26,7 @@ class Product {
 
         }
 
-        $products = $products->where('stock', '>=', 0)->orderBy($request->sort_by, $request->sort_order)->paginate($request->limit)->toArray();
+        $products = $products->where('stock', '>', 0)->orderBy($request->sort_by, $request->sort_order)->paginate($request->limit)->toArray();
 
         return $this->manageProducts($products);
     }

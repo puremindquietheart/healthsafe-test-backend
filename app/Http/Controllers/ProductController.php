@@ -50,7 +50,8 @@ class ProductController extends Controller
             return response()->json([
                 'success'         => true,
                 'server_response' => "ok",
-                'data'            => $products
+                'data'            => $products['body'],
+                'meta'            => $products['meta']
             ], 200);
 
         } catch (\Exception $e) {
