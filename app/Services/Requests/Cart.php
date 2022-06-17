@@ -41,7 +41,7 @@ class Cart {
             'cart_items' => $cartItems,
             'other_data' => [
                 'total_qty'   => $totalQty,
-                'total_price' => $cartTotalPrice
+                'total_price' => number_format($cartTotalPrice, 2)
             ]
         ];
 
