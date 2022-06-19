@@ -65,3 +65,4 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Cloudinary Configuration
 Kindly register for cloudinary to enable image uploading
+NOTE: FOR TESTING PURPOSES I ADDED MY DUMMY CLOUDINARY URL
