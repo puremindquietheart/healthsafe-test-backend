@@ -64,5 +64,7 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 ## Cloudinary Configuration
-Kindly register for cloudinary to enable image uploading
-NOTE: FOR TESTING PURPOSES I ADDED MY DUMMY CLOUDINARY URL
+
+### Note
+- **Kindly register for cloudinary to enable image uploading**
+- **FOR TESTING PURPOSES I ADDED MY DUMMY CLOUDINARY URL**
