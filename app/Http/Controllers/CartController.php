@@ -24,7 +24,8 @@ class CartController extends Controller
 
             $request->validate([
                 'items'            => 'required|array',
-                'items.*.id'       => 'required|exists:products,id',
+                // 'items.*.id'       => 'required|exists:products,id', // uncomment this one because even product is not existing, computation must continue
+                'items.*.id'       => 'required',
                 'items.*.quantity' => 'required|numeric'
             ]);
 
@@ -34,6 +35,7 @@ class CartController extends Controller
                 'success'         => true,
                 'server_response' => "ok",
                 'data'            => $response['cart_items'],
+                'deleted_items'   => $response['deleted_items'],
                 'other_data'      => $response['other_data']
             ], 200);
 

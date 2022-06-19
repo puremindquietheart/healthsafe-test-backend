@@ -63,6 +63,10 @@ class Product {
 
         $product = ProductModel::findOrFail($id);
 
+        $request->merge([
+            'current_image' => $product->image
+        ]);
+
         if ($product->name != $request->name) {
 
             // check if name already exist

@@ -85,7 +85,7 @@ class ProductController extends Controller
                 'success'         => true,
                 'server_response' => "ok",
                 'data'            => $product
-            ], 200);
+            ], 201);
 
         } catch (ValidationException $v) {
 
@@ -145,13 +145,25 @@ class ProductController extends Controller
     public function update($id, Request $request)
     {
         try {
-
-            $request->validate([
-                'name'  => 'required|string',
-                'price' => 'required|numeric',
-                'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-                'stock' => 'required|integer'
+            // for some reason, boolean value from frontend is converting the value from boolean type to string. so, this filter function is necessary
+            $request->merge([
+                'is_new' => filter_var($request->is_new,FILTER_VALIDATE_BOOLEAN,FILTER_NULL_ON_FAILURE)
             ]);
+
+            $validationRule = [
+                'name'   => 'required|string',
+                'price'  => 'required|numeric',
+                'stock'  => 'required|integer',
+                'is_new' => 'required|boolean'
+            ];
+
+            if ($request->is_new) {
+
+                $validationRule['image'] = 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048';
+
+            }
+
+            $request->validate($validationRule);
 
             $product = $this->productRequest->update($id, $request);
 

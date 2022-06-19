@@ -22,9 +22,10 @@ trait ProductHelperTraits {
         return [
             'name'  => $request->name,
             'price' => $request->price,
-            'image' => $this->manageProductImage($request),
+            'image' => ($request->is_new) ? $this->manageProductImage($request) : $request->current_image,
             'stock' => $request->stock
         ];
+
     }
 
     /*
